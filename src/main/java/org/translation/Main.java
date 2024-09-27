@@ -40,26 +40,18 @@ public class Main {
      */
 
     public static void runProgram(Translator translator) {
+        CountryCodeConverter countryCodeConverter = new CountryCodeConverter();
+        LanguageCodeConverter languageCodeConverter = new LanguageCodeConverter();
         while (true) {
             String country = promptForCountry(translator);
-            // TODO CheckStyle: The String "quit" appears 3 times in the file.
-            // TODO Checkstyle: String literal expressions should be on the left side of an equals comparison
             if (QUIT.equals(country)) {
                 break;
             }
-            // TODO Task: Once you switch promptForCountry so that it returns the country
-            //            name rather than the 3-letter country code, you will need to
-            //            convert it back to its 3-letter country code when calling promptForLanguage
             String language = promptForLanguage(translator, country);
             if (QUIT.equals(language)) {
                 break;
             }
-            // TODO Task: Once you switch promptForLanguage so that it returns the language
-            //            name rather than the 2-letter language code, you will need to
-            //            convert it back to its 2-letter language code when calling translate.
-            //            Note: you should use the actual names in the message printed below though,
-            //            since the user will see the displayed message.
-            System.out.println(country + " in " + language + " is " + translator.translate(country, language));
+            System.out.println(countryCodeConverter.fromCountryCode(country) + " in " + languageCodeConverter.fromLanguageCode(language) + " is " + translator.translate(country, language));
             System.out.println("Press enter to continue or quit to exit.");
             Scanner s = new Scanner(System.in);
             String textTyped = s.nextLine();
@@ -82,7 +74,7 @@ public class Main {
         for (String countryName : countryNames) {
             System.out.println(countryName);
         }
-        System.out.println("Select a country from above:");
+        System.out.println("select a country from above:");
 
         Scanner s = new Scanner(System.in);
         String countryInput = s.nextLine();
@@ -107,7 +99,7 @@ public class Main {
         for (String languageName : languageNames) {
             System.out.println(languageName);
         }
-        System.out.println("Select a language from above:");
+        System.out.println("select a language from above:");
 
         Scanner s = new Scanner(System.in);
         String languageInput = s.nextLine();
